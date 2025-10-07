@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151025370373",
+    "project_id": "telegramm-app",
+    "storage_bucket": "telegramm-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151025370373:android:81a6dc385333b2d5ece36c",
+        "android_client_info": {
+          "package_name": "com.example.telegramm_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwTYxA7_0JhrqLidGotSDLwDNXTnesieA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
