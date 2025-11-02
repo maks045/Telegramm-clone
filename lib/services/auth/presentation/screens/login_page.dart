@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:telegramm_app/auth/auth_services.dart';
-import 'package:telegramm_app/auth/presentation/register_screen.dart';
+import 'package:telegramm_app/services/auth/auth_services.dart';
+import 'package:telegramm_app/services/auth/presentation/screens/register_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -63,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(title: const Text('Sign in')),
       body: LayoutBuilder(
         builder: (context, constraints) {

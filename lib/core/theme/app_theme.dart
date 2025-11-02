@@ -27,4 +27,26 @@ class AppTheme {
       titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
   );
+  static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    primaryColor: AppColors.primary,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.primary,
+      foregroundColor: Colors.white,
+      elevation: 0,
+    ),
+    colorScheme: ColorScheme.dark(
+      primary: AppColors.primary,
+      secondary: AppColors.secondary,
+      error: AppColors.error,
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+    ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
+      bodyMedium: TextStyle(fontSize: 14, color: Colors.white),
+      titleLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    ),
+  );
 }

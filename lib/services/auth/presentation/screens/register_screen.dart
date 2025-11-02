@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:telegramm_app/auth/auth_services.dart';
+import 'package:telegramm_app/services/auth/auth_services.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -59,6 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(title: const Text('Register')),
       body: LayoutBuilder(
         builder: (context, constraints) {

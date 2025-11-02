@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:telegramm_app/auth/auth_services.dart';
+import 'package:telegramm_app/services/auth/auth_services.dart';
 
 class UpdateUsernameScreen extends StatefulWidget {
   const UpdateUsernameScreen({super.key});

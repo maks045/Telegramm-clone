@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +8,7 @@ ValueNotifier<AuthServices> authService = ValueNotifier(AuthServices());
 
 class AuthServices {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   User? get currentUser => firebaseAuth.currentUser;
 
@@ -24,6 +28,19 @@ class AuthServices {
     required String email,
     required String password,
   }) async {
+    // try {
+    //   UserCredential userCredential = await firebaseAuth
+    //       .createUserWithEmailAndPassword(email: email, password: password);
+
+    //   firestore.collection('Users').doc(userCredential.user!.uid).set({
+    //     'uuid': userCredential.user!.uid,
+    //     'email': email,
+    //   });
+
+    //   return userCredential;
+    // } on FirebaseAuthException catch (e) {
+    //   throw Exception(e.code);
+    // }
     return await firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,

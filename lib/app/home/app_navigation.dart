@@ -10,6 +10,6 @@ class AppNavigation extends StatefulWidget {
 class _AppNavigationState extends State<AppNavigation> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('nav')));
+    return Scaffold(body: Center(child: Text('navdddd')));
   }
 }

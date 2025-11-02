@@ -1,63 +1,48 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:telegramm_app/auth/auth_services.dart';
+import 'package:telegramm_app/services/auth/auth_services.dart';
 
-class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
+class DeleteAccountScreen extends StatefulWidget {
+  const DeleteAccountScreen({super.key});
 
   @override
-  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+  State<DeleteAccountScreen> createState() => _DeleteAccountScreenState();
 }
 
-class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _currentController = TextEditingController();
-  final TextEditingController _newController = TextEditingController();
-  final TextEditingController _confirmController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _loading = false;
   String _error = '';
 
   @override
   void dispose() {
-    _currentController.dispose();
-    _newController.dispose();
-    _confirmController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
-  Future<void> _changePassword() async {
+  Future<void> _deleteAccount() async {
     if (!_formKey.currentState!.validate()) return;
-    final user = authService.value.currentUser;
-    final email = user?.email;
-    if (email == null) {
-      setState(() => _error = 'Current user has no email');
-      return;
-    }
-
-    if (_newController.text != _confirmController.text) {
-      setState(() => _error = 'New passwords do not match');
-      return;
-    }
-
     setState(() {
       _loading = true;
       _error = '';
     });
 
     try {
-      await authService.value.resetPasswordFromCurrentPassword(
-        currentPassword: _currentController.text,
-        newPassword: _newController.text,
-        email: email,
+      await authService.value.deleteAccount(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
       );
 
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Password updated')));
+      ).showSnackBar(const SnackBar(content: Text('Account deleted')));
       Navigator.of(context).maybePop();
     } on FirebaseAuthException catch (e) {
-      setState(() => _error = e.message ?? 'Failed to change password');
+      setState(() => _error = e.message ?? 'Failed to delete account');
     } catch (_) {
       setState(() => _error = 'Unexpected error');
     } finally {
@@ -69,7 +54,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Change password')),
+      appBar: AppBar(title: const Text('Delete account')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
@@ -89,49 +74,44 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Change password',
+                        'Delete account',
                         style: theme.textTheme.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 12),
-                      TextFormField(
-                        controller: _currentController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'Current password',
-                          prefixIcon: Icon(Icons.lock),
-                        ),
-                        validator: (v) => (v ?? '').isEmpty
-                            ? 'Please enter current password'
-                            : null,
+                      Text(
+                        'This action is irreversible. To delete your account, please enter your email and password to confirm.',
+                        style: theme.textTheme.bodyMedium,
+                        textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
-                        controller: _newController,
-                        obscureText: true,
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
-                          labelText: 'New password',
-                          prefixIcon: Icon(Icons.lock_outline),
+                          labelText: 'Email',
+                          prefixIcon: Icon(Icons.email),
                         ),
                         validator: (v) {
                           final value = v ?? '';
-                          if (value.isEmpty) return 'Please enter new password';
-                          if (value.length < 6)
-                            return 'Password must be at least 6 characters';
+                          if (value.isEmpty) return 'Please enter email';
+                          if (!RegExp(
+                            r"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                          ).hasMatch(value))
+                            return 'Enter a valid email';
                           return null;
                         },
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
-                        controller: _confirmController,
+                        controller: _passwordController,
                         obscureText: true,
                         decoration: const InputDecoration(
-                          labelText: 'Confirm new password',
-                          prefixIcon: Icon(Icons.lock_outline),
+                          labelText: 'Password',
+                          prefixIcon: Icon(Icons.lock),
                         ),
-                        validator: (v) => (v ?? '').isEmpty
-                            ? 'Please confirm new password'
-                            : null,
+                        validator: (v) =>
+                            (v ?? '').isEmpty ? 'Please enter password' : null,
                       ),
                       const SizedBox(height: 12),
                       if (_error.isNotEmpty)
@@ -143,7 +123,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           ),
                         ),
                       ElevatedButton(
-                        onPressed: _loading ? null : _changePassword,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                        ),
+                        onPressed: _loading ? null : _deleteAccount,
                         child: _loading
                             ? const SizedBox(
                                 height: 20,
@@ -157,7 +140,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               )
                             : const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 12),
-                                child: Text('Change password'),
+                                child: Text('Delete my account'),
                               ),
                       ),
                     ],
