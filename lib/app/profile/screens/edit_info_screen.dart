@@ -23,12 +23,12 @@ class _EditInfoScreenState extends State<EditInfoScreen> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text('Profile info'),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   icon: Icon(Icons.arrow_back),
+        // ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

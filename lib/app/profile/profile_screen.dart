@@ -43,12 +43,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ListTile(
                           leading: Icon(Icons.edit),
                           title: Text('Edit info'),
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (ctx) => EditInfoScreen(),
-                            ),
-                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => EditInfoScreen(),
+                              ),
+                            );
+                          },
                         ),
                         ListTile(
                           leading: Icon(Icons.add_a_photo),
