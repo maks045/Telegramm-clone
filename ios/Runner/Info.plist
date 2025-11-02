@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<!-- Access photo library -->
+<key>NSPhotoLibraryUsageDescription</key>
+<string>We need access to your photo library to select profile pictures.</string>
+
+<!-- Optional: access camera if you use it -->
+<key>NSCameraUsageDescription</key>
+<string>We need access to your camera to take profile pictures.</string>
+
+<!-- Optional: access saved photos album -->
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>We need access to save photos to your library.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
