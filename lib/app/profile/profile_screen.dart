@@ -14,36 +14,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // File? _image;
-
-  // final ImagePicker _picker = ImagePicker();
-
-  // Future<void> _pickImage() async {
-  //   final XFile? pickedFile = await _picker.pickImage(
-  //     source: ImageSource.gallery,
-  //   );
-
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       _image = File(pickedFile.path);
-  //     });
-  //   }
-  // }
+  // ignore: unused_field
   File? _image;
 
   final ImagePicker _picker = ImagePicker();
-
-  Future<void> _pickImage() async {
-    final XFile? pickedFile = await _picker.pickImage(
-      source: ImageSource.gallery,
-    );
-
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,41 +76,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             }
 
                             Navigator.pop(context);
-
-                            // Navigator.pop(context);
-                            // showDialog(
-                            //   context: context,
-                            //   builder: (context) => AlertDialog(
-                            //     title: Text('Choose photo or video'),
-                            //     content: _image != null
-                            //         ? Image.file(
-                            //             _image!,
-                            //             width: 200,
-                            //             height: 200,
-                            //             fit: BoxFit.cover,
-                            //           )
-                            //         : Text('No image selected'),
-                            //     actions: [
-                            //       ElevatedButton(
-                            //         onPressed: () async {
-                            //           final XFile? pickedFile = await _picker
-                            //               .pickImage(
-                            //                 source: ImageSource.gallery,
-                            //               );
-                            //           if (pickedFile != null) {
-                            //             setState(() {
-                            //               _image = File(pickedFile.path);
-                            //             });
-                            //           }
-                            //           Navigator.pop(
-                            //             context,
-                            //           ); // close the dialog
-                            //         },
-                            //         child: Text('Pick from Gallery'),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // );
                           },
                         ),
                         ListTile(
