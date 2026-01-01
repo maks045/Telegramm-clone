@@ -1,16 +1,36 @@
-# telegramm_app
+# Telegram Clone - Flutter
 
-A new Flutter project.
+A **Telegram clone** built with **Flutter**, showcasing real-time chat UI, authentication, and messaging features. This is a **learning project** to practice Flutter development and UI design.
+
+---
+
+## Features
+
+- Modern chat interface similar to Telegram
+- User authentication (login/signup)
+- Send and receive messages
+- Display profile pictures and chat avatars
+- Responsive UI for mobile devices
+- Asset-based images for UI elements (profile pics, icons)
+
+---
+
+## Screenshots
+
+Here are some screenshots of the app:
+
+![Home Screen](assets/images/home_screen.png)  
+![Chat Screen](assets/images/chat_screen.png)  
+![Profile Screen](assets/images/profile.png)  
+
+> Replace the paths with your actual asset paths. Make sure images exist in `assets/images/`.
+
+---
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### 1. Clone the repository
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+git clone https://github.com/yourusername/telegramm_app.git
+cd telegramm_app
