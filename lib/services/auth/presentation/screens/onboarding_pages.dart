@@ -3,30 +3,31 @@ import 'package:telegramm_app/services/auth/presentation/screens/onboarding_scre
 
 List<Widget> onBoardingPages = [
   OnboardingScreen(
-    image: 'assets/logo/logo_t.png',
+    // image: 'assets/logo/logo_t.png',
+    animation: 'assets/emoji/telegram_logo.json',
     description: "The world's fastest meassaging app. \n It is free and secure",
     title: 'Telegram',
   ),
   OnboardingScreen(
-    image: 'assets/logo/speed.png',
+    animation: 'assets/emoji/speed.json',
     description:
         "Telegram delivers messages\n faster than any other application.",
     title: 'Fast',
   ),
   OnboardingScreen(
-    image: 'assets/logo/free.jpg',
+    animation: 'assets/emoji/free.json',
     description:
         "Telegram provides free unlimited\n cloud storage for chats and media.",
     title: 'Free',
   ),
   OnboardingScreen(
-    image: 'assets/logo/infinty.png',
+    animation: 'assets/emoji/infinity.json',
     description:
         "Telegram has no limits on\n the size of your media and chats.",
     title: 'Powerful',
   ),
   OnboardingScreen(
-    image: 'assets/logo/secure.jpg',
+    animation: 'assets/emoji/secure.json',
     description: "Telegram keeps your message safe\n from hacker attacks.",
     title: 'Secure',
   ),

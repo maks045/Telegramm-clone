@@ -1,0 +1,24 @@
+// import 'package:flutter/material.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
+// class WebViewScreen extends StatelessWidget {
+//   final String url;
+
+//   const WebViewScreen({super.key, required this.url});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Web Page')),
+//       body: WebView(
+//         initialUrl: url,
+//         javascriptMode: JavascriptMode.unrestricted,
+//       ),
+//     );
+//   }
+// }
+// Navigator.push(
+//   context,
+//   MaterialPageRoute(
+//     builder: (context) => const WebViewScreen(url: 'https://flutter.dev'),
+//   ),
+// );

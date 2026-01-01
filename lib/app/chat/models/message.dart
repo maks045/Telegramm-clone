@@ -10,8 +10,8 @@ class MessageModel {
   MessageModel({
     required this.senderID,
     required this.senderEmail,
-    required this.message,
     required this.receiverID,
+    required this.message,
     required this.timestamp,
   });
 
@@ -23,5 +23,15 @@ class MessageModel {
       'message': message,
       'timestamp': timestamp,
     };
+  }
+
+  factory MessageModel.fromMap(Map<String, dynamic> map) {
+    return MessageModel(
+      senderID: map['senderID'] ?? '',
+      senderEmail: map['senderEmail'] ?? '',
+      receiverID: map['receiverID'] ?? '',
+      message: map['message'] ?? '',
+      timestamp: map['timestamp'] ?? Timestamp.now(),
+    );
   }
 }

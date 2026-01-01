@@ -13,6 +13,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerConfirm = TextEditingController();
+  // TextEditingController controllerName = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String errorMeassage = '';
   bool _loading = false;
@@ -23,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     controllerEmail.dispose();
     controllerPassword.dispose();
     controllerConfirm.dispose();
+    // controllerName.dispose();
     super.dispose();
   }
 
@@ -34,6 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
     try {
       await authService.value.createAccount(
+        // name: controllerName.text,
         email: controllerEmail.text.trim(),
         password: controllerPassword.text,
       );
@@ -63,9 +66,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       appBar: AppBar(title: const Text('Register')),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final width = constraints.maxWidth > 600
-              ? 480.0
-              : constraints.maxWidth * 0.92;
+          final width =
+              constraints.maxWidth > 600 ? 480.0 : constraints.maxWidth * 0.92;
           return Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 24.0),
@@ -96,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 20),
-
+                          const SizedBox(height: 12),
                           TextFormField(
                             controller: controllerEmail,
                             keyboardType: TextInputType.emailAddress,
@@ -109,13 +111,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               if (value.isEmpty) return 'Please enter email';
                               if (!RegExp(
                                 r"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                              ).hasMatch(value))
-                                return 'Enter a valid email';
+                              ).hasMatch(value)) return 'Enter a valid email';
                               return null;
                             },
                           ),
                           const SizedBox(height: 12),
-
                           TextFormField(
                             controller: controllerPassword,
                             obscureText: _obscure,
@@ -141,7 +141,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                           const SizedBox(height: 12),
-
                           TextFormField(
                             controller: controllerConfirm,
                             obscureText: _obscure,
@@ -159,7 +158,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                           const SizedBox(height: 16),
-
                           if (errorMeassage.isNotEmpty)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12.0),
@@ -170,7 +168,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                             ),
-
                           ElevatedButton(
                             onPressed: _loading ? null : register,
                             child: _loading
@@ -189,7 +186,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: Text('Create account'),
                                   ),
                           ),
-
                           const SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

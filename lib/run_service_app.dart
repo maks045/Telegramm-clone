@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:telegramm_app/app/profile/profile_widget.dart';
+import 'package:telegramm_app/app/profile/widgets/profile_widget.dart';
 import 'package:telegramm_app/core/theme/theme_provider.dart';
 import 'package:telegramm_app/services/auth/presentation/screens/welcome_screen.dart';
 import 'package:telegramm_app/services/auth/auth_layout.dart';

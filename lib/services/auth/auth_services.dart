@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,24 +25,35 @@ class AuthServices {
   Future<UserCredential> createAccount({
     required String email,
     required String password,
+    // required String name, // add name
   }) async {
-    // try {
-    //   UserCredential userCredential = await firebaseAuth
-    //       .createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      UserCredential userCredential = await firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-    //   firestore.collection('Users').doc(userCredential.user!.uid).set({
-    //     'uuid': userCredential.user!.uid,
-    //     'email': email,
-    //   });
+      // Save user info to Firestore
+      await registerUser(
+        userCredential.user!.uid, email,
+        // name
+      );
 
-    //   return userCredential;
-    // } on FirebaseAuthException catch (e) {
-    //   throw Exception(e.code);
-    // }
-    return await firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.code);
+    }
+  }
+
+  Future<void> registerUser(
+    String uid,
+    String email,
+    // String name
+  ) async {
+    await firestore.collection('Users').doc(uid).set({
+      'uuid': uid,
+      'email': email,
+      // 'name': name, // optional
+      // 'createdAt': FieldValue.serverTimestamp(),
+    });
   }
 
   Future<void> signOut() async {

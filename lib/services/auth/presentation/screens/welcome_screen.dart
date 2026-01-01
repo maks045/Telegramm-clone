@@ -19,12 +19,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: IconButton(
-          icon: Icon(Icons.sunny),
-          color: Colors.black,
-          onPressed: () =>
-              Provider.of<ThemeProvider>(context, listen: false).toggleTheme(),
-        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.sunny),
+            color: Colors.black,
+            onPressed: () => Provider.of<ThemeProvider>(context, listen: false)
+                .toggleTheme(),
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -58,26 +60,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             }),
           ),
           SizedBox(height: 250),
-
-          // Spacer(),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     Navigator.pushReplacementNamed(context, '/phoneVerification');
-          //   },
-          //   child: Text('Start messaging'),
-          // ),
-          // Padding(
-          //   padding: EdgeInsetsGeometry.symmetric(horizontal: 120),
-          //   child: Container(
-          //     width: 200,
-          //     height: 20,
-          //     decoration: BoxDecoration(
-          //       color: Colors.red,
-          //       borderRadius: BorderRadius.circular(12),
-          //     ),
-          //     child: Text('Start messaging'),
-          //   ),
-          // ),
           GestureDetector(
             onTap: () => Navigator.push(
               context,

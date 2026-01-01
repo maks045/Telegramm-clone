@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({super.key, required this.onTap});
+  const AppButton({super.key, required this.onTap, required this.title});
   final VoidCallback onTap;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -20,7 +20,7 @@ class AppButton extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           child: Text(
-            'Save',
+            title,
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),

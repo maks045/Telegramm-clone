@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:telegramm_app/app/home/app_navigation.dart';
 import 'package:telegramm_app/app/home/home_screen.dart';
-import 'package:telegramm_app/app/profile/profile_screen.dart';
-import 'package:telegramm_app/app/profile/screens/edit_info_screen.dart';
 import 'package:telegramm_app/services/auth/auth_services.dart';
-import 'package:telegramm_app/core/loading/app_loading.dart';
 import 'package:telegramm_app/services/auth/presentation/screens/welcome_screen.dart';
 
 class AuthLayout extends StatelessWidget {

@@ -5,69 +5,67 @@ import 'package:telegramm_app/app/chat/models/message.dart';
 class ChatServices {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  // // ✅ Add this method
-  // Stream<List<Map<String, dynamic>>> getUserStream() {
-  //   return firestore.collection('Users').snapshots().map((snapshot) {
-  //     return snapshot.docs.map((doc) => doc.data()).toList();
-  //   });
-  // }
 
-  // // You can add other chat-related methods here later,
-  // // like sending messages, getting chat streams, etc.
   Stream<List<Map<String, dynamic>>> getUserStream() {
-    return FirebaseFirestore.instance.collection('Users').snapshots().map((
-      snapshot,
-    ) {
-      return snapshot.docs.map((doc) {
-        final data = Map<String, dynamic>.from(doc.data() as Map);
-        // Include the document id to help with navigation or debugging
-        data['id'] = doc.id;
-        return data;
-      }).toList();
+    return firestore.collection('Users').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 
-  ///send message
+  Future<void> sendMessage(String receiverID, String message) async {
+    final currentUser = auth.currentUser;
+    if (currentUser == null) throw Exception('Not authenticated');
 
-  Future<void> sendMessage(String recieverID, message) async {
-    ///get current user info
-    final String currentUserID = auth.currentUser!.uid;
-    final String currentUserEmail = auth.currentUser!.email!;
+    final String currentUserID = currentUser.uid;
+    final String currentUserEmail = currentUser.email ?? '';
     final Timestamp timestamp = Timestamp.now();
 
-    ///create a new message
-
-    MessageModel newMessage = MessageModel(
+    final MessageModel newMessage = MessageModel(
       senderID: currentUserID,
       senderEmail: currentUserEmail,
+      receiverID: receiverID,
       message: message,
-      receiverID: recieverID,
       timestamp: timestamp,
     );
 
-    //construct chat room ID for 2 people
-
-    List<String> ids = [currentUserID, recieverID];
+    // chat room id deterministic for two participants
+    List<String> ids = [currentUserID, receiverID];
     ids.sort();
     String chatRoomID = ids.join('_');
+
     await firestore
         .collection('chat_room')
         .doc(chatRoomID)
         .collection('messages')
         .add(newMessage.toMap());
+    // await firestore
+    // .collection('Users') // ✅ correct collection
+    // .doc(user.uid)
+    // .set({
+    //   'name': name,
+    //   'email': email,
+    //   // other info
+    // });
+
+    // Optional: update lastMessage on chat room doc for fast chat list loads
+    await firestore.collection('chat_room').doc(chatRoomID).set({
+      // 'lastMessage': message,
+      // 'lastMessageTime': timestamp,
+      // 'participants': ids,
+    }, SetOptions(merge: true));
   }
 
-  ///get message
-
-  Stream<QuerySnapshot> getMessages(String userID, otherUserID) {
+  // Stream messages between userID and otherUserID (both UIDs)
+  Stream<QuerySnapshot> getMessages(String userID, String otherUserID) {
     List<String> ids = [userID, otherUserID];
     ids.sort();
     String chatRoomID = ids.join('_');
+
     return firestore
         .collection('chat_room')
         .doc(chatRoomID)
         .collection('messages')
-        .orderBy('timestamp', descending: false)
+        .orderBy('timestamp', descending: false) // oldest -> newest
         .snapshots();
   }
 }
