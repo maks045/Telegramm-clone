@@ -23,9 +23,6 @@ Here are some screenshots of the app:
 ![Chat Screen](assets/images/chat_screen.png)  
 ![Profile Screen](assets/images/profile.png)  
 
-> Replace the paths with your actual asset paths. Make sure images exist in `assets/images/`.
-
----
 
 ## Getting Started
 
